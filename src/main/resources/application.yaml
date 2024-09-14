@@ -1,0 +1,11 @@
+ktor:
+    application:
+        modules:
+            - com.burdantap.ApplicationKt.module
+    deployment:
+        port: 2020
+jwt:
+  issuer: "https://0.0.0.0:2020"
+  domain: "https://0.0.0.0:2020"
+  audience: "aa11bb22cc33cc22bb11aa"
+  realm: "burdantap server application"
