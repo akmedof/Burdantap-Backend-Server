@@ -12,6 +12,7 @@ fun Route.errorRoutes() {
     unauthorizedErrorRoute()
     forbiddenErrorRoute()
     notFoundError(message = "Partner məlumatları tapılmadı.", endpoint = ErrorEndpoint.NotFoundPartner)
+    notFoundError(message = "Store məlumatları tapılmadı.", endpoint = ErrorEndpoint.NotFoundStore)
 }
 
 private fun Route.authenticationErrorRoutes() {

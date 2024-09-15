@@ -14,5 +14,6 @@ private fun Application.authentication() {
         partnerAuthenticationRoute()
         errorRoutes()
         partnerRoutes()
+        storeRoutes()
     }
 }
