@@ -1,5 +1,7 @@
 package com.burdantap.util
 
+import kotlin.random.Random
+
 fun String.toSlug(): String {
     // Başındaki ve sonundaki boşlukları kaldır
     // Azerice karakterleri İngilizce eşdeğerleriyle değiştir
@@ -23,4 +25,19 @@ fun String.toEnglish(): String {
         'Ç' to 'C', 'Ə' to 'E', 'Ğ' to 'G', 'I' to 'I', 'Ö' to 'O', 'Ş' to 'S', 'Ü' to 'U'
     )
     return this.map { turkishChars[it] ?: it }.joinToString("")
+}
+
+fun String.normalizeProductTitle(): String {
+    // Harf ve rakam dışındaki karakterleri kaldırır
+    // Baş ve sondaki boşlukları kaldırır
+    // Aradaki fazla boşlukları tek bir boşlukla değiştirir
+    return this.toEnglish()
+        .replace(Regex("[^\\p{L}\\p{Nd}\\s]"), "")
+        .trim()
+        .replace(Regex("\\s+"), " ")
+}
+
+fun generateNineDigitNumber(): Int {
+    // 9 haneli bir sayı 100_000_000 ile 999_999_999 arasında olmalıdır
+    return Random.nextInt(100_000_000, 1_000_000_000)
 }
