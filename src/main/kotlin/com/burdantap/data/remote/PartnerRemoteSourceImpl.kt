@@ -19,8 +19,13 @@ class PartnerRemoteSourceImpl(
 
     private val partnerCollection = database.getCollection<PartnerEntity>("partner")
 
-    override suspend fun create(partner: PartnerDto): Boolean {
-        return partnerCollection.insertOne(document = partner.toEntity()).wasAcknowledged()
+    override suspend fun create(partner: PartnerDto): PartnerResponse? {
+        partnerCollection.insertOne(document = partner.toEntity()).wasAcknowledged()
+        return partnerCollection.find(PartnerEntity::email eq partner.email).first()?.toResponse()
+    }
+
+    override suspend fun checkEmail(email: String): Boolean {
+        return partnerCollection.countDocuments(PartnerEntity::email eq email) > 0
     }
 
     override suspend fun checkEmailAndPassword(loginDto: PartnerLoginDto): PartnerResponse? {
@@ -30,6 +35,10 @@ class PartnerRemoteSourceImpl(
                 PartnerEntity::password eq SHA256HashingService().generateSaltedHash(loginDto.password).value
             )
         ).first()?.toResponse()
+    }
+
+    override suspend fun readById(id: String): PartnerResponse? {
+        return partnerCollection.find(PartnerEntity::uuid eq id).first()?.toResponse()
     }
 
 //    override suspend fun getPartnerById(id: String): PartnerResponse {

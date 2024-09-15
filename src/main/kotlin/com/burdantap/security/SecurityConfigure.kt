@@ -1,5 +1,7 @@
 package com.burdantap.security
 
+import com.burdantap.domain.model.endpoint.AuthEndpoint
+import com.burdantap.domain.model.endpoint.ErrorEndpoint
 import com.burdantap.domain.model.securty.TokenType
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -32,14 +34,12 @@ fun Application.configureSecurity(
 
 private fun JWTAuthenticationProvider.Config.unauthorized() {
     challenge { _, _ ->
-//        call.respondRedirect(AuthEndpoint.Unauthorized.path)
-        call.respond(message = "Unauthorized", status = HttpStatusCode.Unauthorized)
+        call.respondRedirect(ErrorEndpoint.Unauthorized.path)
     }
 }
 
 private fun JWTAuthenticationProvider.Config.refreshTokenForbidden() {
     challenge { _, _ ->
-//        call.respondRedirect(AuthEndpoint.Forbidden.path)
-        call.respond(message = "Forbidden", status = HttpStatusCode.Forbidden)
+        call.respondRedirect(ErrorEndpoint.Forbidden.path)
     }
 }

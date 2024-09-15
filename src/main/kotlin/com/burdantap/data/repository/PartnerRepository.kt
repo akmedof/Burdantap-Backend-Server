@@ -8,12 +8,20 @@ import com.burdantap.domain.reposirory.PartnerRemoteSource
 class PartnerRepository(
     private val remote: PartnerRemoteSource
 ): PartnerRemoteSource {
-    override suspend fun create(partner: PartnerDto): Boolean {
+    override suspend fun create(partner: PartnerDto): PartnerResponse? {
         return remote.create(partner)
+    }
+
+    override suspend fun checkEmail(email: String): Boolean {
+        return remote.checkEmail(email)
     }
 
     override suspend fun checkEmailAndPassword(loginDto: PartnerLoginDto): PartnerResponse? {
         return remote.checkEmailAndPassword(loginDto)
+    }
+
+    override suspend fun readById(id: String): PartnerResponse? {
+        return remote.readById(id)
     }
 
 //    override suspend fun getPartnerById(id: String): PartnerResponse {

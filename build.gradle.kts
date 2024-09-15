@@ -63,4 +63,5 @@ dependencies {
     //Email
     implementation("com.sun.mail:javax.mail:1.6.2")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")}
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.2.3")
+}

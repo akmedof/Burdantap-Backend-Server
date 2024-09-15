@@ -6,9 +6,9 @@ import com.burdantap.domain.model.response.PartnerResponse
 
 interface PartnerRemoteSource {
 
-    suspend fun create(partner: PartnerDto): Boolean
+    suspend fun create(partner: PartnerDto): PartnerResponse?
+    suspend fun checkEmail(email: String): Boolean
     suspend fun checkEmailAndPassword(loginDto: PartnerLoginDto): PartnerResponse?
-//    suspend fun getPartnerById(id: String): PartnerResponse
-//    suspend fun existsPartnerByEmail(email: String): PartnerResponse
+    suspend fun readById(id: String): PartnerResponse?
 
 }

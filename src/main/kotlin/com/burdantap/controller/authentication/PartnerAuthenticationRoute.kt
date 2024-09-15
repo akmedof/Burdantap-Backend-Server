@@ -3,59 +3,77 @@ package com.burdantap.controller.authentication
 import com.burdantap.data.repository.PartnerRepository
 import com.burdantap.domain.dto.partner.PartnerDto
 import com.burdantap.domain.dto.partner.PartnerLoginDto
+import com.burdantap.domain.model.base.BaseResponse
+import com.burdantap.domain.model.base.ErrorResponse
 import com.burdantap.domain.model.endpoint.AuthEndpoint
-import com.burdantap.security.hasing.SHA256HashingService
+import com.burdantap.domain.model.endpoint.ErrorEndpoint
+import com.burdantap.security.JWTManager
 import io.ktor.http.*
-import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.java.KoinJavaComponent.inject
 
 fun Route.partnerAuthenticationRoute() {
+    val jwtManager = JWTManager(application)
     val repository: PartnerRepository by inject(PartnerRepository::class.java)
-    login(repository)
-    register(repository)
+    login(jwtManager, repository)
+    register(jwtManager, repository)
 }
 
 private fun Route.login(
+    jwtManager: JWTManager,
     repository: PartnerRepository
 ){
     post(AuthEndpoint.PartnerLogin.path) {
         val request = call.receive<PartnerLoginDto>()
         val partner = repository.checkEmailAndPassword(request)
-        application.log.info("LOGIN: $request")
-        application.log.info("LOGIN PASS HASH: ${SHA256HashingService().generateSaltedHash(request.password)}")
-        application.log.info("LOGIN CHECK: $partner")
         if (partner != null) {
             call.respond(
-                message = partner,
+                message = BaseResponse(
+                    success = true,
+                    data = jwtManager.createPartnerToken(partner)
+                ),
                 status = HttpStatusCode.OK
             )
         }else{
-            call.respond(
-                message = "Bu ${request.email} uzre Partner tapilmadi",
-                status = HttpStatusCode.NotFound
-            )
+            call.respondRedirect(ErrorEndpoint.NotFoundPartner.path)
         }
     }
 }
 
 private fun Route.register(
+    jwtManager: JWTManager,
     repository: PartnerRepository
 ){
     post(AuthEndpoint.PartnerRegister.path) {
         val request = call.receive<PartnerDto>()
-        val checkEmail = repository.create(request)
-        application.log.info("REQUEST: $request")
-        if (checkEmail){
-            call.respond(
-                message = "Email yoxdur",
-                status = HttpStatusCode.OK
-            )
+        val checkEmail = repository.checkEmail(request.email)
+        if (!checkEmail){
+            val partner = repository.create(request)
+            if (partner != null) {
+                call.respond(
+                    message = BaseResponse(
+                        success = true,
+                        data = jwtManager.createPartnerToken(partner)
+                    ),
+                    status = HttpStatusCode.Created
+                )
+            }else{
+                call.respond(
+                    message = ErrorResponse(
+                        code = HttpStatusCode.BadRequest.value,
+                        message = "Register error!!!"
+                    ),
+                    status = HttpStatusCode.BadRequest
+                )
+            }
         }else{
             call.respond(
-                message = "Email Var",
+                message = ErrorResponse(
+                    code = HttpStatusCode.BadRequest.value,
+                    message = "${request.email} already exists"
+                ),
                 status = HttpStatusCode.BadRequest
             )
         }
