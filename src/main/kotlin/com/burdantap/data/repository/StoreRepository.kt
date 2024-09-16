@@ -13,4 +13,8 @@ class StoreRepository(private val remote: StoreRemoteSource): StoreRemoteSource 
         return remote.read(partnerId)
     }
 
+    override suspend fun existsStoreBySlug(slug: String): Boolean {
+        return remote.existsStoreBySlug(slug)
+    }
+
 }

@@ -23,4 +23,8 @@ class StoreRemoteSourceImpl(
         return storeCollection.find(filter = StoreEntity::partnerId eq partnerId).first()?.toResponse()
     }
 
+    override suspend fun existsStoreBySlug(slug: String): Boolean {
+        return storeCollection.countDocuments(filter = StoreEntity::slug eq slug) > 0
+    }
+
 }

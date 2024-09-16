@@ -7,6 +7,6 @@ interface StoreRemoteSource {
 
     suspend fun create(dto: StoreDto, partnerId: String): Boolean
     suspend fun read(partnerId: String): StoreResponse?
-
+    suspend fun existsStoreBySlug(slug: String): Boolean
 
 }
