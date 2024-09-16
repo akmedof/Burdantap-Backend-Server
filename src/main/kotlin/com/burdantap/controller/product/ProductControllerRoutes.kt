@@ -4,4 +4,5 @@ import io.ktor.server.routing.*
 
 fun Route.productControllerRoutes() {
     productCreateRoute()
+    productReadRoutes()
 }

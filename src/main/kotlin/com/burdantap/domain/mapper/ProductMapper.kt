@@ -4,6 +4,7 @@ import com.burdantap.domain.dto.product.ProductDetailDto
 import com.burdantap.domain.dto.product.ProductDto
 import com.burdantap.domain.entity.product.ProductDetailEntity
 import com.burdantap.domain.entity.product.ProductEntity
+import com.burdantap.domain.model.response.product.ProductDetailResponse
 import com.burdantap.util.generateNineDigitNumber
 import com.burdantap.util.normalizeProductTitle
 import com.burdantap.util.toSlug
@@ -23,4 +24,14 @@ fun ProductDetailDto.toEntity(modelCode: String) = ProductDetailEntity(
 
 fun List<ProductDetailDto>.toEntitiesMap(modelCode: String): List<ProductDetailEntity> {
     return this.map { it.toEntity(modelCode = modelCode) }
+}
+
+fun List<ProductDetailEntity>.toResponses(): List<ProductDetailResponse> {
+    return this.map { detail ->
+        ProductDetailResponse(
+            id = detail.uuid,
+            title = detail.title,
+            slug = detail.slug,
+        )
+    }
 }

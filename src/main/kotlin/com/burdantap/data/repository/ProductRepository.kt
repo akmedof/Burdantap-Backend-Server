@@ -14,7 +14,7 @@ class ProductRepository(private val remote: ProductRemoteSource): ProductRemoteS
     }
 
     override suspend fun readBySlug(slug: String): ProductResponse? {
-        TODO("Not yet implemented")
+        return remote.readBySlug(slug)
     }
 
 }
