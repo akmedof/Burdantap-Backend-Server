@@ -6,10 +6,11 @@ import com.burdantap.plugins.*
 import com.burdantap.security.JWTManager
 import com.burdantap.security.configureSecurity
 import io.ktor.server.application.*
+import io.ktor.server.netty.*
 import org.koin.ktor.plugin.Koin
 
 fun main(args: Array<String>) {
-    io.ktor.server.netty.EngineMain.main(args)
+    EngineMain.main(args)
 }
 
 @Suppress("unused")
@@ -18,6 +19,7 @@ fun Application.module() {
     configureSerialization()
     configureSecurity(JWTManager(this))
     configureRouting()
+
 }
 
 fun Application.configureKoin() {

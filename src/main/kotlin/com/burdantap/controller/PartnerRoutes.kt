@@ -7,6 +7,7 @@ import com.burdantap.domain.model.endpoint.PartnerEndpoint
 import com.burdantap.domain.model.securty.TokenType
 import com.burdantap.security.securityVerifyPartnerContent
 import io.ktor.http.*
+import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*

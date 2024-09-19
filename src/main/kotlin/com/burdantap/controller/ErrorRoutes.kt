@@ -3,6 +3,7 @@ package com.burdantap.controller
 import com.burdantap.domain.model.base.ErrorResponse
 import com.burdantap.domain.model.endpoint.ErrorEndpoint
 import io.ktor.http.*
+import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.get

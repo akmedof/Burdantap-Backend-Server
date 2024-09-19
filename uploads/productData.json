@@ -1,0 +1,22 @@
+{
+    "modelCode": "777777",
+    "storeId": "5aa6523e-a355-40e2-8dde-557093458204",
+    "description": "Salam Desc",
+    "details": [
+        {
+            "title": "Product 1@&#.   #*@*@*@()@)). @@# ",
+            "color": "dark",
+            "images": ["dark_image1.jpg", "dark_image2.jpg"]
+        },
+        {
+            "title": "Product 2",
+            "color": "red",
+            "images": ["red_image1.jpg", "red_image2.jpg"]
+        },
+        {
+            "title": "Product 3",
+            "color": "blue",
+            "images": ["blue_image1.jpg", "blue_image2.jpg"]
+        }
+    ]
+}
