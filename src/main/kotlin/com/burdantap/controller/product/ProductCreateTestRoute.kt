@@ -29,7 +29,7 @@ internal fun Route.productCreateTestRoute() {
     post(ProductEndpoint.CreateTest.path) {
         val multipart = call.receiveMultipart()
         var fileName = ""
-        var productDto: ProductTestDto? = ProductTestDto()
+        var productDto: ProductTestDto? = null
         val uploadDirPath = "uploads/store/blue"
         val targetDir = File(uploadDirPath)
 
