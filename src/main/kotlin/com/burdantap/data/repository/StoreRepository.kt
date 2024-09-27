@@ -9,8 +9,8 @@ class StoreRepository(private val remote: StoreRemoteSource): StoreRemoteSource 
         return remote.create(dto, partnerId)
     }
 
-    override suspend fun read(partnerId: String): StoreResponse? {
-        return remote.read(partnerId)
+    override suspend fun readByPartnerId(partnerId: String): StoreResponse? {
+        return remote.readByPartnerId(partnerId)
     }
 
     override suspend fun existsStoreBySlug(slug: String): Boolean {

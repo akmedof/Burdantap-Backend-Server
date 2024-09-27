@@ -11,13 +11,10 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.util.*
-import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import java.io.File
-import javax.mail.Multipart
 import kotlin.io.use
 
 private val json = Json {
@@ -39,6 +36,7 @@ internal fun Route.productCreateTestRoute() {
         multipart.forEachPart { part ->
             if (part is PartData.FileItem) {
                 fileName = part.originalFileName ?: "uploadedFile"
+                application.log.info("FILE TYPE: KEY NAME = ${part.name}")
                 part.contentType?.let { contentType ->
                     when (contentType) {
                         ContentType.Application.Json -> {

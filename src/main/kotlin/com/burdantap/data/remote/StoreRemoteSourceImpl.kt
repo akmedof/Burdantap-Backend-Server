@@ -19,7 +19,7 @@ class StoreRemoteSourceImpl(
        return storeCollection.insertOne(document = dto.toCreateEntity(partnerId)).wasAcknowledged()
     }
 
-    override suspend fun read(partnerId: String): StoreResponse? {
+    override suspend fun readByPartnerId(partnerId: String): StoreResponse? {
         return storeCollection.find(filter = StoreEntity::partnerId eq partnerId).first()?.toResponse()
     }
 

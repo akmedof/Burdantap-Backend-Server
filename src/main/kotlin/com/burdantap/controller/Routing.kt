@@ -1,6 +1,8 @@
 package com.burdantap.controller
 
 import com.burdantap.controller.authentication.partnerAuthenticationRoute
+import com.burdantap.controller.color.colorRoutes
+import com.burdantap.controller.file.fileRoutes
 import com.burdantap.controller.product.productControllerRoutes
 import com.burdantap.controller.store.storeRoutes
 import io.ktor.server.application.*
@@ -18,5 +20,7 @@ private fun Application.authentication() {
         partnerRoutes()
         storeRoutes()
         productControllerRoutes()
+        colorRoutes()
+        fileRoutes()
     }
 }

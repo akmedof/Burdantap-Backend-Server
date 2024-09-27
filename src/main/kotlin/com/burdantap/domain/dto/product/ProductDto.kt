@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 data class ProductDto(
     val modelCode: String,
     val storeId: String,
-    val details: List<ProductDetailDto>,
+    val storeSlug: String,
     val description: String,
+    val details: List<ProductDetailDto>,
 )

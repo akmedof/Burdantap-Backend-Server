@@ -15,7 +15,7 @@ internal fun Route.readStoreByPartnerToken(repository: StoreRepository) {
     authenticate(TokenType.ACCESS.value) {
         get(StoreEndpoint.Read.path) {
             securityVerifyPartnerContent(call){ partnerId ->
-                val store = repository.read(partnerId)
+                val store = repository.readByPartnerId(partnerId)
                 if (store != null) {
                     call.respond(
                         message = BaseResponse(

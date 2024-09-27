@@ -1,17 +1,8 @@
 package com.burdantap.di
 
-import com.burdantap.data.remote.PartnerRemoteSourceImpl
-import com.burdantap.data.remote.ProductDetailRemoteSourceImpl
-import com.burdantap.data.remote.ProductRemoteSourceImpl
-import com.burdantap.data.remote.StoreRemoteSourceImpl
-import com.burdantap.data.repository.PartnerRepository
-import com.burdantap.data.repository.ProductDetailRepository
-import com.burdantap.data.repository.ProductRepository
-import com.burdantap.data.repository.StoreRepository
-import com.burdantap.domain.reposirory.PartnerRemoteSource
-import com.burdantap.domain.reposirory.ProductDetailRemoteSource
-import com.burdantap.domain.reposirory.ProductRemoteSource
-import com.burdantap.domain.reposirory.StoreRemoteSource
+import com.burdantap.data.remote.*
+import com.burdantap.data.repository.*
+import com.burdantap.domain.reposirory.*
 import org.koin.dsl.module
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
@@ -30,4 +21,7 @@ val databaseModule = module {
 
     single<ProductDetailRemoteSource> { ProductDetailRemoteSourceImpl(get()) }
     single<ProductDetailRepository> { ProductDetailRepository(get()) }
+
+    single<ColorRemoteSource> { ColorRemoteSourceImpl(get()) }
+    single<ColorRepository> { ColorRepository(get()) }
 }

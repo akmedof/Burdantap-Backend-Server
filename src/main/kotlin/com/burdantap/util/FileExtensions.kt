@@ -9,20 +9,38 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import java.io.File
 
+fun fileProductDirectionCreate(storeSlug: String, modelCode: String, colorSlug: String): File {
+    val uploadDir = File("${FileDirectionPath.Stores.path}/$storeSlug/${FileDirectionPath.Products.path}/$modelCode/$colorSlug")
+    if (!uploadDir.exists()) {
+        uploadDir.mkdirs()
+    }
+    return uploadDir
+}
+
+fun createProductImagePath(
+    storeSlug: String,
+    modelCode: String,
+    colorSlug: String,
+    imageName: String,
+):String{
+    return "/${FileDirectionPath.Gallery.path}/${FileDirectionPath.Products.path}/$storeSlug/$modelCode/$colorSlug/$imageName"
+}
+
+fun getProductImagePath(
+    storeSlug: String,
+    modelCode: String,
+    colorSlug: String,
+    imageName: String,
+):File{
+    return File("./${FileDirectionPath.Stores.path}/$storeSlug/${FileDirectionPath.Products.path}/$modelCode/$colorSlug/$imageName")
+}
+
 suspend fun getCustomerPhotoImage(call: ApplicationCall, image: String) {
     call.respondFile(File("./${FileDirectionPath.Uploads}/${FileDirectionPath.Customers}/$image"))
 }
 
 fun getFileUrl(call: ApplicationCall, direction: String): String =
     "${call.request.origin.scheme}://${call.request.host()}:${call.request.port()}/${FileDirectionPath.Gallery.path}/$direction"
-
-fun fileDirectionCreate(path: String): File {
-    val uploadDir = File("${FileDirectionPath.Uploads.path}/$path")
-    if (!uploadDir.exists()) {
-        uploadDir.mkdirs()
-    }
-    return uploadDir
-}
 
 fun fileDirectionStoreCreate(
     storeSlug: String,
@@ -73,14 +91,14 @@ fun getProductImagesFileTarget(
         File(file, "${fileName}.${contentType.contentSubtype}")
     } else null
 
-fun getImageFileTarget(fileName: String, contentType: ContentType): File? =
-    if (contentType == ContentType.Image.JPEG || contentType == ContentType.Image.PNG) {
-        deleteImagesByFileName(
-            directoryPath = FileDirectionPath.Customers.path,
-            fileName = fileName
-        )
-        File(fileDirectionCreate(FileDirectionPath.Customers.path), "${fileName}.${contentType.contentSubtype}")
-    } else null
+//fun getImageFileTarget(fileName: String, contentType: ContentType): File? =
+//    if (contentType == ContentType.Image.JPEG || contentType == ContentType.Image.PNG) {
+//        deleteImagesByFileName(
+//            directoryPath = FileDirectionPath.Customers.path,
+//            fileName = fileName
+//        )
+//        File(fileDirectionCreate(FileDirectionPath.Customers.path), "${fileName}.${contentType.contentSubtype}")
+//    } else null
 
 fun deleteImagesByFileName(directoryPath: String, fileName: String) {
     val directory = File("${FileDirectionPath.Uploads.path}/$directoryPath")
