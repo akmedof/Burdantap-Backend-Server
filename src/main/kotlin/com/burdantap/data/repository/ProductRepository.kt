@@ -9,9 +9,9 @@ class ProductRepository(private val remote: ProductRemoteSource): ProductRemoteS
         return remote.create(dto)
     }
 
-    override suspend fun updateProductDetailsIdByModelCode(modelCode: String): Boolean {
-        return remote.updateProductDetailsIdByModelCode(modelCode)
-    }
+//    override suspend fun updateProductDetailsIdByModelCode(modelCode: String): Boolean {
+//        return remote.updateProductDetailsIdByModelCode(modelCode)
+//    }
 
     override suspend fun readBySlug(slug: String): ProductResponse? {
         return remote.readBySlug(slug)

@@ -40,12 +40,4 @@ class PartnerRemoteSourceImpl(
     override suspend fun readById(id: String): PartnerResponse? {
         return partnerCollection.find(PartnerEntity::uuid eq id).first()?.toResponse()
     }
-
-//    override suspend fun getPartnerById(id: String): PartnerResponse {
-//        TODO("Not yet implemented")
-//    }
-//
-//    override suspend fun existsPartnerByEmail(email: String): PartnerResponse {
-//        TODO("Not yet implemented")
-//    }
 }

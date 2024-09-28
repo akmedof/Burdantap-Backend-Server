@@ -13,17 +13,17 @@ import org.koin.ktor.ext.inject
 
 internal fun Route.productCreateRoute() {
     val productRepository by inject<ProductRepository>()
-    val productDetailRepository by inject<ProductDetailRepository>()
+//    val productDetailRepository by inject<ProductDetailRepository>()
     post(ProductEndpoint.Create.path) {
         val dto = call.receive<ProductDto>()
         application.log.info("Product created: $dto")
         val isCreateProduct = productRepository.create(dto)
-        val isCreateDetails = productDetailRepository.create(dto.details, dto.modelCode)
-        if (isCreateProduct && isCreateDetails) {
-            val isUpdateProductId = productRepository.updateProductDetailsIdByModelCode(
-                modelCode = dto.modelCode,
-            )
-            call.respond(HttpStatusCode.Created, "Product: $isCreateProduct Details: $isCreateDetails Updated ID: $isUpdateProductId")
-        }
+//        val isCreateDetails = productDetailRepository.create(dto.details, dto.modelCode)
+//        if (isCreateProduct && isCreateDetails) {
+//            val isUpdateProductId = productRepository.updateProductDetailsIdByModelCode(
+//                modelCode = dto.modelCode,
+//            )
+//            call.respond(HttpStatusCode.Created, "Product: $isCreateProduct Details: $isCreateDetails Updated ID: $isUpdateProductId")
+//        }
     }
 }

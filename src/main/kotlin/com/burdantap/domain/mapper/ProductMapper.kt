@@ -12,26 +12,28 @@ import com.burdantap.util.toSlug
 fun ProductDto.toEntity() = ProductEntity(
     modelCode = modelCode,
     storeId = storeId,
-    detailsId = listOf(),
     descriptions = description
 )
 
-fun ProductDetailDto.toEntity(modelCode: String) = ProductDetailEntity(
+fun ProductDetailEntity.toResponse(): ProductDetailResponse = ProductDetailResponse(
+    id = uuid,
+    modelCode = modelCode,
+    title = title,
+    slug = slug,
+    images = imageUrls,
+)
+
+fun List<ProductDetailDto>.toEntitiesMap(modelCode: String, imageMap: Map<String, List<String>>): List<ProductDetailEntity> {
+    return this.map { it.toEntity(modelCode = modelCode, images = imageMap[it.colorSlug] ?: listOf()) }
+}
+
+fun ProductDetailDto.toEntity(modelCode: String, images: List<String>) = ProductDetailEntity(
     title = title.normalizeProductTitle(),
     slug = "${title.normalizeProductTitle().toSlug()}-${generateNineDigitNumber()}",
     modelCode = modelCode,
+    imageUrls = images,
 )
 
-fun List<ProductDetailDto>.toEntitiesMap(modelCode: String): List<ProductDetailEntity> {
-    return this.map { it.toEntity(modelCode = modelCode) }
-}
-
 fun List<ProductDetailEntity>.toResponses(): List<ProductDetailResponse> {
-    return this.map { detail ->
-        ProductDetailResponse(
-            id = detail.uuid,
-            title = detail.title,
-            slug = detail.slug,
-        )
-    }
+    return this.map { it.toResponse() }
 }

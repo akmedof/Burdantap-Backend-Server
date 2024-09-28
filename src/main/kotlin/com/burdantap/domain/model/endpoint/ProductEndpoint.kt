@@ -5,4 +5,5 @@ sealed class ProductEndpoint(val path: String) {
     data object CreateNew : ProductEndpoint("/product/create-new")
     data object CreateTest : ProductEndpoint("/product/create-test")
     data object Read: ProductEndpoint("/{store-slug}/{product-slug}")
+    data object ReadProductDetailsByModelCode: ProductEndpoint("product/detail/list/{model-code}")
 }

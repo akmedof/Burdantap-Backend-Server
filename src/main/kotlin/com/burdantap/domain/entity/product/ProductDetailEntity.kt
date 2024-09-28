@@ -10,6 +10,7 @@ data class ProductDetailEntity(
     val title: String,
     val slug: String,
     val modelCode: String,
+    val imageUrls: List<String> = listOf(),
 //    val colorId: String,
 //    val specificationsId: List<String>,
     val createdAt: String = LocalDateTime.now().toString()

@@ -22,13 +22,13 @@ class ProductRemoteSourceImpl(private val database: CoroutineDatabase) : Product
         return productCollection.insertOne(document = dto.toEntity()).wasAcknowledged()
     }
 
-    override suspend fun updateProductDetailsIdByModelCode(modelCode: String): Boolean {
-        val productDetails = productDetailCollection.find(ProductDetailEntity::modelCode eq modelCode).toList()
-        return productCollection.updateOne(
-            filter = ProductEntity::modelCode eq modelCode,
-            update = setValue(ProductEntity::detailsId, productDetails.map { it.uuid })
-        ).wasAcknowledged()
-    }
+//    override suspend fun updateProductDetailsIdByModelCode(modelCode: String): Boolean {
+//        val productDetails = productDetailCollection.find(ProductDetailEntity::modelCode eq modelCode).toList()
+//        return productCollection.updateOne(
+//            filter = ProductEntity::modelCode eq modelCode,
+//            update = setValue(ProductEntity::detailsId, productDetails.map { it.uuid })
+//        ).wasAcknowledged()
+//    }
 
     override suspend fun readBySlug(slug: String): ProductResponse? {
         val modelCode = productDetailCollection.findOne(ProductDetailEntity::slug eq slug)?.modelCode ?: return null

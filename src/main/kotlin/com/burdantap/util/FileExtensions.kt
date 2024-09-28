@@ -23,7 +23,7 @@ fun createProductImagePath(
     colorSlug: String,
     imageName: String,
 ):String{
-    return "/${FileDirectionPath.Gallery.path}/${FileDirectionPath.Products.path}/$storeSlug/$modelCode/$colorSlug/$imageName"
+    return "${FileDirectionPath.Gallery.path}/${FileDirectionPath.Products.path}/$storeSlug/$modelCode/$colorSlug/$imageName"
 }
 
 fun getProductImagePath(

@@ -1,5 +1,6 @@
 package com.burdantap.controller.product
 
+import com.burdantap.data.repository.ProductDetailRepository
 import com.burdantap.data.repository.ProductRepository
 import com.burdantap.data.repository.StoreRepository
 import com.burdantap.domain.dto.product.ProductDto
@@ -30,25 +31,23 @@ private val json = Json {
 @ExperimentalSerializationApi
 fun Route.productCreateRouteNew() {
     val repository by inject<ProductRepository>()
-    val repositoryStore by inject<StoreRepository>()
+    val detailRepository by inject<ProductDetailRepository>()
+    var product: ProductDto? = null
+    val mapImages: MutableMap<String, MutableList<String>> = mutableMapOf()
     post(ProductEndpoint.CreateNew.path) {
-        val multipartData = call.receiveMultipart()
-//        val store = repositoryStore.readByPartnerId("7b5da3e2-389c-4221-990e-ecccb13532a4")
-        var product: ProductDto? = null
-        var productJson = ""
-        multipartData.forEachPart { part ->
+        call.receiveMultipart().forEachPart { part ->
             if (part is PartData.FileItem) {
                 when (part.contentType) {
                     ContentType.Application.Json -> {
                         part.provider().use { input ->
-                            productJson = input.readBytes().toString(Charsets.UTF_8)
+                            val productJson = input.readBytes().toString(Charsets.UTF_8)
                             product = json.decodeFromString<ProductDto>(productJson)
                         }
                     }
                     ContentType.Image.JPEG, ContentType.Image.PNG -> {
                         if (product != null) {
-                            product?.details?.forEach{ item ->
-                                if (item.colorSlug == part.name){
+                            product?.details?.forEach { item ->
+                                if (item.colorSlug == part.name) {
                                     val targetDir = fileProductDirectionCreate(
                                         storeSlug = product?.storeSlug.toString(),
                                         modelCode = product?.modelCode.toString(),
@@ -58,13 +57,16 @@ fun Route.productCreateRouteNew() {
                                         val byteArray = input.readBytes()
                                         File(targetDir, part.originalFileName ?: "Empty").writeBytes(byteArray)
                                     }
-                                    val url = "${call.request.origin.scheme}://${call.request.host()}:${call.request.port()}/${createProductImagePath(
-                                        storeSlug = product?.storeSlug.toString(),
-                                        modelCode = product?.modelCode.toString(),
-                                        colorSlug = item.colorSlug,
-                                        imageName = part.originalFileName.toString()
-                                    )}"
-                                    application.log.info("URL: $url")
+                                    val url =
+                                        "${call.request.origin.scheme}://${call.request.host()}:${call.request.port()}/${
+                                            createProductImagePath(
+                                                storeSlug = product?.storeSlug.toString(),
+                                                modelCode = product?.modelCode.toString(),
+                                                colorSlug = item.colorSlug,
+                                                imageName = part.originalFileName.toString()
+                                            )
+                                        }"
+                                    mapImages.computeIfAbsent(item.colorSlug) { mutableListOf() }.add(url)
                                 }
                             }
                         }
@@ -73,6 +75,14 @@ fun Route.productCreateRouteNew() {
             }
             part.dispose()
         }
+        if (product != null && product?.details?.isNotEmpty() == true) {
+            detailRepository.create(
+                modelCode = product?.modelCode.toString(),
+                imageMap = mapImages,
+                dtoCollection = product?.details ?: listOf(),
+            )
+        }
+        application.log.info("IMAGES: ${mapImages[product?.details?.get(0)?.colorSlug]}")
         call.respond(
             message = BaseResponse(
                 success = true,
