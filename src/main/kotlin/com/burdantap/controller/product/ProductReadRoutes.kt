@@ -19,7 +19,6 @@ fun Route.productReadRoutes() {
 
 private fun Route.readBySlug(repository: ProductRepository) {
     get(ProductEndpoint.Read.path) {
-        val storeSlug = call.parameters["store-slug"] ?: ""
         val productSlug = call.parameters["product-slug"] ?: ""
         val product = repository.readBySlug(productSlug)
         call.respond(

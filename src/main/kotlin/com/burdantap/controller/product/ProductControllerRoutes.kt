@@ -8,5 +8,4 @@ import kotlinx.serialization.ExperimentalSerializationApi
 fun Route.productControllerRoutes() {
     productCreateRoute()
     productReadRoutes()
-    productCreateRouteNew()
 }

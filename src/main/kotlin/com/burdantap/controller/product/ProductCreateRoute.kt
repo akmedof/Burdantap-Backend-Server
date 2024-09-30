@@ -3,27 +3,86 @@ package com.burdantap.controller.product
 import com.burdantap.data.repository.ProductDetailRepository
 import com.burdantap.data.repository.ProductRepository
 import com.burdantap.domain.dto.product.ProductDto
+import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.domain.model.endpoint.ProductEndpoint
+import com.burdantap.util.createProductImagePath
+import com.burdantap.util.fileProductDirectionCreate
 import io.ktor.http.*
+import io.ktor.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.utils.io.core.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import org.koin.ktor.ext.inject
+import java.io.File
 
-internal fun Route.productCreateRoute() {
-    val productRepository by inject<ProductRepository>()
-//    val productDetailRepository by inject<ProductDetailRepository>()
-    post(ProductEndpoint.Create.path) {
-        val dto = call.receive<ProductDto>()
-        application.log.info("Product created: $dto")
-        val isCreateProduct = productRepository.create(dto)
-//        val isCreateDetails = productDetailRepository.create(dto.details, dto.modelCode)
-//        if (isCreateProduct && isCreateDetails) {
-//            val isUpdateProductId = productRepository.updateProductDetailsIdByModelCode(
-//                modelCode = dto.modelCode,
-//            )
-//            call.respond(HttpStatusCode.Created, "Product: $isCreateProduct Details: $isCreateDetails Updated ID: $isUpdateProductId")
-//        }
+@ExperimentalSerializationApi
+private val json = Json {
+    ignoreUnknownKeys = true
+    explicitNulls = true
+}
+
+@ExperimentalSerializationApi
+fun Route.productCreateRoute() {
+    val repository by inject<ProductRepository>()
+    val detailRepository by inject<ProductDetailRepository>()
+    var product: ProductDto? = null
+    val mapImages: MutableMap<String, MutableList<String>> = mutableMapOf()
+    post(ProductEndpoint.CreateNew.path) {
+        call.receiveMultipart().forEachPart { part ->
+            if (part is PartData.FileItem) {
+                when (part.contentType) {
+                    ContentType.Application.Json -> {
+                        part.provider().use { input ->
+                            val productJson = input.readBytes().toString(Charsets.UTF_8)
+                            product = json.decodeFromString<ProductDto>(productJson)
+                        }
+                    }
+                    ContentType.Image.JPEG, ContentType.Image.PNG -> {
+                        if (product != null) {
+                            product?.details?.forEach { item ->
+                                if (item.colorSlug == part.name) {
+                                    val targetDir = fileProductDirectionCreate(
+                                        storeSlug = product?.storeSlug.toString(),
+                                        modelCode = product?.modelCode.toString(),
+                                        colorSlug = item.colorSlug,
+                                    )
+                                    part.provider().use { input ->
+                                        val byteArray = input.readBytes()
+                                        File(targetDir, part.originalFileName ?: "Empty").writeBytes(byteArray)
+                                    }
+                                    val url = createProductImagePath(
+                                                storeSlug = product?.storeSlug.toString(),
+                                                modelCode = product?.modelCode.toString(),
+                                                colorSlug = item.colorSlug,
+                                                imageName = part.originalFileName.toString()
+                                            )
+                                    mapImages.computeIfAbsent(item.colorSlug) { mutableListOf() }.add(url)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            part.dispose()
+        }
+        if (product != null && product?.details?.isNotEmpty() == true) {
+            repository.create(product!!)
+            detailRepository.create(
+                modelCode = product?.modelCode.toString(),
+                imageMap = mapImages,
+                dtoCollection = product?.details ?: listOf(),
+            )
+        }
+        call.respond(
+            message = BaseResponse(
+                success = true,
+                data = product,
+            ),
+            status = HttpStatusCode.Created,
+        )
     }
 }

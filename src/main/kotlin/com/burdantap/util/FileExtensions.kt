@@ -9,6 +9,10 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import java.io.File
 
+fun getBaseUrl(call: ApplicationCall): String {
+    return "${call.request.origin.scheme}://${call.request.host()}:${call.request.port()}/"
+}
+
 fun fileProductDirectionCreate(storeSlug: String, modelCode: String, colorSlug: String): File {
     val uploadDir = File("${FileDirectionPath.Stores.path}/$storeSlug/${FileDirectionPath.Products.path}/$modelCode/$colorSlug")
     if (!uploadDir.exists()) {

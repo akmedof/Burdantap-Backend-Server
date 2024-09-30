@@ -5,6 +5,7 @@ import com.burdantap.domain.dto.product.ProductDto
 import com.burdantap.domain.entity.product.ProductDetailEntity
 import com.burdantap.domain.entity.product.ProductEntity
 import com.burdantap.domain.model.response.product.ProductDetailResponse
+import com.burdantap.util.Constants
 import com.burdantap.util.generateNineDigitNumber
 import com.burdantap.util.normalizeProductTitle
 import com.burdantap.util.toSlug
@@ -20,7 +21,7 @@ fun ProductDetailEntity.toResponse(): ProductDetailResponse = ProductDetailRespo
     modelCode = modelCode,
     title = title,
     slug = slug,
-    images = imageUrls,
+    images = imageUrls.map { "${Constants.BASE_URL}/$it" },
 )
 
 fun List<ProductDetailDto>.toEntitiesMap(modelCode: String, imageMap: Map<String, List<String>>): List<ProductDetailEntity> {
