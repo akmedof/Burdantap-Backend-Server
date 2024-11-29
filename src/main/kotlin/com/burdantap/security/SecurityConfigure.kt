@@ -1,7 +1,7 @@
 package com.burdantap.security
 
-import com.burdantap.domain.model.endpoint.AuthEndpoint
-import com.burdantap.domain.model.endpoint.ErrorEndpoint
+import com.burdantap.controller.endpoint.AuthEndpoint
+import com.burdantap.controller.endpoint.ErrorEndpoint
 import com.burdantap.domain.model.securty.TokenType
 import io.ktor.http.*
 import io.ktor.server.application.*

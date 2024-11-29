@@ -1,4 +1,4 @@
-package com.burdantap.domain.model.endpoint
+package com.burdantap.controller.endpoint
 
 sealed class ErrorEndpoint(val path: String) {
     data object NotFoundStore: ErrorEndpoint("/error/not-found-store")

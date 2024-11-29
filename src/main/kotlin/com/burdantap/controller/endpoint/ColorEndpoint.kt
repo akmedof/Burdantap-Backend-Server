@@ -1,4 +1,4 @@
-package com.burdantap.domain.model.endpoint
+package com.burdantap.controller.endpoint
 
 sealed class ColorEndpoint(val path: String) {
     data object Create: ColorEndpoint("/color/create")

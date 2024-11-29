@@ -1,6 +1,6 @@
 package com.burdantap.util
 
-import com.burdantap.domain.model.endpoint.FileDirectionPath
+import com.burdantap.controller.endpoint.FileDirectionPath
 import io.ktor.http.*
 import io.ktor.http.content.*
 import io.ktor.server.application.*

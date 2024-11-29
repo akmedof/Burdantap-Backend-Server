@@ -2,8 +2,8 @@ package com.burdantap.controller
 
 import com.burdantap.data.repository.PartnerRepository
 import com.burdantap.domain.model.base.BaseResponse
-import com.burdantap.domain.model.endpoint.ErrorEndpoint
-import com.burdantap.domain.model.endpoint.PartnerEndpoint
+import com.burdantap.controller.endpoint.ErrorEndpoint
+import com.burdantap.controller.endpoint.PartnerEndpoint
 import com.burdantap.domain.model.securty.TokenType
 import com.burdantap.security.securityVerifyPartnerContent
 import io.ktor.http.*

@@ -1,4 +1,4 @@
-package com.burdantap.domain.model.endpoint
+package com.burdantap.controller.endpoint
 
 sealed class StoreEndpoint(val path: String) {
     data object Create: StoreEndpoint("/store/create")
