@@ -7,9 +7,12 @@ import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.domain.model.base.ErrorResponse
 import com.burdantap.domain.model.endpoint.AuthEndpoint
 import com.burdantap.domain.model.endpoint.ErrorEndpoint
+import com.burdantap.domain.model.securty.TokenType
 import com.burdantap.security.JWTManager
+import com.burdantap.security.securityVerifyPartnerContent
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -20,6 +23,7 @@ fun Route.partnerAuthenticationRoute() {
     val repository: PartnerRepository by inject(PartnerRepository::class.java)
     login(jwtManager, repository)
     register(jwtManager, repository)
+    refreshToken(jwtManager)
 }
 
 private fun Route.login(
@@ -33,7 +37,7 @@ private fun Route.login(
             call.respond(
                 message = BaseResponse(
                     success = true,
-                    data = jwtManager.createPartnerToken(partner)
+                    data = jwtManager.createPartnerToken(partner.id)
                 ),
                 status = HttpStatusCode.OK
             )
@@ -56,7 +60,7 @@ private fun Route.register(
                 call.respond(
                     message = BaseResponse(
                         success = true,
-                        data = jwtManager.createPartnerToken(partner)
+                        data = jwtManager.createPartnerToken(partner.id)
                     ),
                     status = HttpStatusCode.Created
                 )
@@ -77,6 +81,22 @@ private fun Route.register(
                 ),
                 status = HttpStatusCode.BadRequest
             )
+        }
+    }
+}
+
+private fun Route.refreshToken(jwtManager: JWTManager) {
+    authenticate(TokenType.REFRESH.value) {
+        post(AuthEndpoint.PartnerRefreshToken.path) {
+            securityVerifyPartnerContent(call) { partnerId ->
+                call.respond(
+                    message = BaseResponse(
+                        success = true,
+                        data = jwtManager.createPartnerToken(partnerId)
+                    ),
+                    status = HttpStatusCode.Created
+                )
+            }
         }
     }
 }

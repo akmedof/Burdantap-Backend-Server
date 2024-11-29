@@ -7,5 +7,6 @@ sealed class AuthEndpoint(val path: String) {
     data object PartnerLogin : AuthEndpoint("/auth/login/partner")
     data object PartnerRegister : AuthEndpoint("/auth/register/partner")
     data object PartnerVerified : AuthEndpoint("/auth/verify/partner")
+    data object PartnerRefreshToken : AuthEndpoint("/auth/refresh/token/partner")
     data object Unauthorized : AuthEndpoint("/auth/unauthorized")
 }

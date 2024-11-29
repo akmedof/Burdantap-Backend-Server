@@ -36,19 +36,20 @@ class JWTManager(
 //            )
 //        )
 
-    fun createPartnerToken(partner: PartnerResponse): TokenResponse =
+    fun createPartnerToken(partnerId: String): TokenResponse =
         TokenResponse(
             access = generateToken(
-                id = partner.id,
+                id = partnerId,
                 role = AccessRole.PARTNER,
                 tokenType = TokenType.ACCESS,
                 expirationDate = 60 * 60 * 1000L // 1 hours
             ),
             refresh = generateToken(
-                id = partner.id,
+                id = partnerId,
                 role = AccessRole.PARTNER,
                 tokenType = TokenType.REFRESH,
-                expirationDate = 90 * 24 * 60 * 60 * 1000L // 90 day
+//                expirationDate = 90 * 24 * 60 * 60 * 1000L // 90 day
+                expirationDate = 1000L // 90 day
             )
         )
 
