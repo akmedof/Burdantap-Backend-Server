@@ -1,6 +1,6 @@
 package com.burdantap.security
 
-import com.burdantap.domain.model.endpoint.ErrorEndpoint
+import com.burdantap.controller.endpoint.ErrorEndpoint
 import com.burdantap.domain.model.securty.AccessRole
 import io.ktor.server.application.*
 import io.ktor.server.auth.*

@@ -5,8 +5,8 @@ import com.burdantap.data.repository.ProductRepository
 import com.burdantap.data.repository.StoreRepository
 import com.burdantap.domain.dto.product.ProductDto
 import com.burdantap.domain.model.base.BaseResponse
-import com.burdantap.domain.model.endpoint.FileDirectionPath
-import com.burdantap.domain.model.endpoint.ProductEndpoint
+import com.burdantap.controller.endpoint.FileDirectionPath
+import com.burdantap.controller.endpoint.ProductEndpoint
 import com.burdantap.util.createProductImagePath
 import com.burdantap.util.fileProductDirectionCreate
 import io.ktor.http.*

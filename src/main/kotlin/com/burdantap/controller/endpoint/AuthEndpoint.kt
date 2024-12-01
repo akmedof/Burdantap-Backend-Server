@@ -1,4 +1,4 @@
-package com.burdantap.domain.model.endpoint
+package com.burdantap.controller.endpoint
 
 sealed class AuthEndpoint(val path: String) {
     data object CustomerLogin : AuthEndpoint("/auth/login/customer")

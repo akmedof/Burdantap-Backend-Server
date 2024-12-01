@@ -5,6 +5,7 @@ import com.burdantap.controller.color.colorRoutes
 import com.burdantap.controller.file.fileRoutes
 import com.burdantap.controller.product.productControllerRoutes
 import com.burdantap.controller.store.storeRoutes
+import com.burdantap.controller.util.utilRoute
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -22,5 +23,6 @@ private fun Application.authentication() {
         productControllerRoutes()
         colorRoutes()
         fileRoutes()
+        utilRoute()
     }
 }

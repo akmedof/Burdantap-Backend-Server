@@ -5,8 +5,8 @@ import com.burdantap.domain.dto.partner.PartnerDto
 import com.burdantap.domain.dto.partner.PartnerLoginDto
 import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.domain.model.base.ErrorResponse
-import com.burdantap.domain.model.endpoint.AuthEndpoint
-import com.burdantap.domain.model.endpoint.ErrorEndpoint
+import com.burdantap.controller.endpoint.AuthEndpoint
+import com.burdantap.controller.endpoint.ErrorEndpoint
 import com.burdantap.domain.model.securty.TokenType
 import com.burdantap.security.JWTManager
 import com.burdantap.security.securityVerifyPartnerContent
@@ -29,7 +29,7 @@ fun Route.partnerAuthenticationRoute() {
 private fun Route.login(
     jwtManager: JWTManager,
     repository: PartnerRepository
-){
+) {
     post(AuthEndpoint.PartnerLogin.path) {
         val request = call.receive<PartnerLoginDto>()
         val partner = repository.checkEmailAndPassword(request)
@@ -41,7 +41,7 @@ private fun Route.login(
                 ),
                 status = HttpStatusCode.OK
             )
-        }else{
+        } else {
             call.respondRedirect(ErrorEndpoint.NotFoundPartner.path)
         }
     }
@@ -50,34 +50,23 @@ private fun Route.login(
 private fun Route.register(
     jwtManager: JWTManager,
     repository: PartnerRepository
-){
+) {
     post(AuthEndpoint.PartnerRegister.path) {
         val request = call.receive<PartnerDto>()
-        val checkEmail = repository.checkEmail(request.email)
-        if (!checkEmail){
-            val partner = repository.create(request)
-            if (partner != null) {
-                call.respond(
-                    message = BaseResponse(
-                        success = true,
-                        data = jwtManager.createPartnerToken(partner.id)
-                    ),
-                    status = HttpStatusCode.Created
-                )
-            }else{
-                call.respond(
-                    message = ErrorResponse(
-                        code = HttpStatusCode.BadRequest.value,
-                        message = "Register error!!!"
-                    ),
-                    status = HttpStatusCode.BadRequest
-                )
-            }
-        }else{
+        val partner = repository.create(request)
+        if (partner != null) {
+            call.respond(
+                message = BaseResponse(
+                    success = true,
+                    data = jwtManager.createPartnerToken(partner.id)
+                ),
+                status = HttpStatusCode.Created
+            )
+        } else {
             call.respond(
                 message = ErrorResponse(
                     code = HttpStatusCode.BadRequest.value,
-                    message = "${request.email} already exists"
+                    message = "Register error!!!"
                 ),
                 status = HttpStatusCode.BadRequest
             )
@@ -94,7 +83,7 @@ private fun Route.refreshToken(jwtManager: JWTManager) {
                         success = true,
                         data = jwtManager.createPartnerToken(partnerId)
                     ),
-                    status = HttpStatusCode.Created
+                    status = HttpStatusCode.OK
                 )
             }
         }

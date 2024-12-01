@@ -1,6 +1,6 @@
 package com.burdantap.controller.file
 
-import com.burdantap.domain.model.endpoint.FileEndpoint
+import com.burdantap.controller.endpoint.FileEndpoint
 import com.burdantap.util.getProductImagePath
 import io.ktor.http.*
 import io.ktor.server.application.*
