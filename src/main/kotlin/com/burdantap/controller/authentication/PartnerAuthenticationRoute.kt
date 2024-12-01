@@ -83,7 +83,7 @@ private fun Route.refreshToken(jwtManager: JWTManager) {
                         success = true,
                         data = jwtManager.createPartnerToken(partnerId)
                     ),
-                    status = HttpStatusCode.Created
+                    status = HttpStatusCode.OK
                 )
             }
         }

@@ -43,13 +43,14 @@ class JWTManager(
                 role = AccessRole.PARTNER,
                 tokenType = TokenType.ACCESS,
                 expirationDate = 60 * 60 * 1000L // 1 hours
+//                expirationDate = 1 * 1000L // 1 seconds
             ),
             refresh = generateToken(
                 id = partnerId,
                 role = AccessRole.PARTNER,
                 tokenType = TokenType.REFRESH,
-//                expirationDate = 90 * 24 * 60 * 60 * 1000L // 90 day
-                expirationDate = 1000L // 90 day
+                expirationDate = 90 * 24 * 60 * 60 * 1000L // 90 day
+//                expirationDate = 1 * 1000L // 1 seconds
             )
         )
 
