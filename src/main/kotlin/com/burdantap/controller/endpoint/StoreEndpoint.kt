@@ -6,5 +6,6 @@ sealed class StoreEndpoint(val path: String) {
     data object Update: StoreEndpoint("/store/update")
     data object Delete: StoreEndpoint("/store/delete")
     data object Check: StoreEndpoint("/store/check")
+    data object Exist: StoreEndpoint("/store/exists")
 
 }

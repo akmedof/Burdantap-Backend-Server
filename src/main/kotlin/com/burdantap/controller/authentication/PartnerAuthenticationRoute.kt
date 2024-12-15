@@ -7,6 +7,7 @@ import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.domain.model.base.ErrorResponse
 import com.burdantap.controller.endpoint.AuthEndpoint
 import com.burdantap.controller.endpoint.ErrorEndpoint
+import com.burdantap.domain.model.response.LoginResponse
 import com.burdantap.domain.model.securty.TokenType
 import com.burdantap.security.JWTManager
 import com.burdantap.security.securityVerifyPartnerContent
@@ -37,7 +38,10 @@ private fun Route.login(
             call.respond(
                 message = BaseResponse(
                     success = true,
-                    data = jwtManager.createPartnerToken(partner.id)
+                    data = LoginResponse(
+                        partner = partner,
+                        token = jwtManager.createPartnerToken(partner.id)
+                    )
                 ),
                 status = HttpStatusCode.OK
             )

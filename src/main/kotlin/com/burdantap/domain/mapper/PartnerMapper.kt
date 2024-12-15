@@ -11,6 +11,7 @@ fun PartnerEntity.toResponse(): PartnerResponse =
         name = this.name,
         surname = this.surname,
         email = this.email,
+        storeStatus = this.storeStatus
     )
 
 fun PartnerDto.toEntity(): PartnerEntity =

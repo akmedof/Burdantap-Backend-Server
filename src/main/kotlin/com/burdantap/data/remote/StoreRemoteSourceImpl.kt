@@ -27,4 +27,8 @@ class StoreRemoteSourceImpl(
         return storeCollection.countDocuments(filter = StoreEntity::slug eq slug) > 0
     }
 
+    override suspend fun existsStoreByName(name: String): Boolean {
+        return storeCollection.countDocuments(filter = StoreEntity::name eq name) > 0
+    }
+
 }

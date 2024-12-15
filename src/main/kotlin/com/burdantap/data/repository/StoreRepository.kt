@@ -17,4 +17,8 @@ class StoreRepository(private val remote: StoreRemoteSource): StoreRemoteSource 
         return remote.existsStoreBySlug(slug)
     }
 
+    override suspend fun existsStoreByName(name: String): Boolean {
+        return remote.existsStoreByName(name)
+    }
+
 }

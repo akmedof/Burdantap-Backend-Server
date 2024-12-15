@@ -8,5 +8,6 @@ interface StoreRemoteSource {
     suspend fun create(dto: StoreDto, partnerId: String): Boolean
     suspend fun readByPartnerId(partnerId: String): StoreResponse?
     suspend fun existsStoreBySlug(slug: String): Boolean
+    suspend fun existsStoreByName(name: String): Boolean
 
 }

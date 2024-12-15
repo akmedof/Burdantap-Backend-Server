@@ -9,4 +9,5 @@ fun Route.storeRoutes() {
     createStore(repository)
     readStoreByPartnerToken(repository)
     checkStoreBySlugRoute(repository)
+    existsStoreByName(repository)
 }
