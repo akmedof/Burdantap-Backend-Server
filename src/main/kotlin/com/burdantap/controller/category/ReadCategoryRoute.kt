@@ -27,6 +27,7 @@ fun Route.readMainCategoryRoute(repository: CategoryRepository){
     }
 }
 
+
 fun Route.readSubCategoryRoute(repository: CategoryRepository){
     get(CategoryEndpoint.ReadSubCategory.path){
         call.respond(
