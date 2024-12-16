@@ -1,7 +1,7 @@
 package com.burdantap.domain.mapper
 
-import com.burdantap.domain.dto.partner.PartnerDto
-import com.burdantap.domain.entity.PartnerEntity
+import com.burdantap.domain.model.dto.partner.PartnerDto
+import com.burdantap.domain.model.entity.PartnerEntity
 import com.burdantap.domain.model.response.PartnerResponse
 import com.burdantap.security.hasing.SHA256HashingService
 

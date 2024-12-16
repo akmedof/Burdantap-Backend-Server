@@ -1,6 +1,7 @@
 package com.burdantap.controller
 
 import com.burdantap.controller.authentication.partnerAuthenticationRoute
+import com.burdantap.controller.category.categoryRoutes
 import com.burdantap.controller.color.colorRoutes
 import com.burdantap.controller.file.fileRoutes
 import com.burdantap.controller.product.productControllerRoutes
@@ -22,6 +23,7 @@ private fun Application.authentication() {
         storeRoutes()
         productControllerRoutes()
         colorRoutes()
+        categoryRoutes()
         fileRoutes()
         utilRoute()
     }

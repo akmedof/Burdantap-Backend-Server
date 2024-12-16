@@ -1,5 +1,5 @@
 
-package com.burdantap.domain.dto.partner
+package com.burdantap.domain.model.dto.partner
 
 import kotlinx.serialization.Serializable
 

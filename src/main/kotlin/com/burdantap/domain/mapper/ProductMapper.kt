@@ -1,9 +1,9 @@
 package com.burdantap.domain.mapper
 
-import com.burdantap.domain.dto.product.ProductDetailDto
-import com.burdantap.domain.dto.product.ProductDto
-import com.burdantap.domain.entity.product.ProductDetailEntity
-import com.burdantap.domain.entity.product.ProductEntity
+import com.burdantap.domain.model.dto.product.ProductDetailDto
+import com.burdantap.domain.model.dto.product.ProductDto
+import com.burdantap.domain.model.entity.product.ProductDetailEntity
+import com.burdantap.domain.model.entity.product.ProductEntity
 import com.burdantap.domain.model.response.product.ProductDetailResponse
 import com.burdantap.util.generateNineDigitNumber
 import com.burdantap.util.normalizeProductTitle

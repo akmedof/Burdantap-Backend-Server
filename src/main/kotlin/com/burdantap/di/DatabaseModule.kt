@@ -24,4 +24,7 @@ val databaseModule = module {
 
     single<ColorRemoteSource> { ColorRemoteSourceImpl(get()) }
     single<ColorRepository> { ColorRepository(get()) }
+
+    single<CategoryRemoteSource> { CategoryRemoteSourceImpl(get()) }
+    single<CategoryRepository> { CategoryRepository(get()) }
 }

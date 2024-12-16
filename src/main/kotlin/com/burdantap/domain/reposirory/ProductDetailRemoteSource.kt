@@ -1,6 +1,6 @@
 package com.burdantap.domain.reposirory
 
-import com.burdantap.domain.dto.product.ProductDetailDto
+import com.burdantap.domain.model.dto.product.ProductDetailDto
 import com.burdantap.domain.model.response.product.ProductDetailResponse
 
 interface ProductDetailRemoteSource {

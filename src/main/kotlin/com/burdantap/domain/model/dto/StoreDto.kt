@@ -1,8 +1,8 @@
-package com.burdantap.domain.dto.color
+package com.burdantap.domain.model.dto
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ColorDto(
+data class StoreDto(
     val name: String,
 )

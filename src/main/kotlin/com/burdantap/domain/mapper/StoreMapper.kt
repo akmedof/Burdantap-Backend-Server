@@ -1,7 +1,7 @@
 package com.burdantap.domain.mapper
 
-import com.burdantap.domain.dto.StoreDto
-import com.burdantap.domain.entity.StoreEntity
+import com.burdantap.domain.model.dto.StoreDto
+import com.burdantap.domain.model.entity.StoreEntity
 import com.burdantap.domain.model.response.StoreResponse
 import com.burdantap.util.toSlug
 

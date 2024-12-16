@@ -2,7 +2,7 @@ package com.burdantap.controller.product
 
 import com.burdantap.data.repository.ProductDetailRepository
 import com.burdantap.data.repository.ProductRepository
-import com.burdantap.domain.dto.product.ProductDto
+import com.burdantap.domain.model.dto.product.ProductDto
 import com.burdantap.controller.endpoint.ProductEndpoint
 import io.ktor.http.*
 import io.ktor.server.application.*

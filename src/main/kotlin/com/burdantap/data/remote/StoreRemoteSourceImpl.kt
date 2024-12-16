@@ -1,7 +1,7 @@
 package com.burdantap.data.remote
 
-import com.burdantap.domain.dto.StoreDto
-import com.burdantap.domain.entity.StoreEntity
+import com.burdantap.domain.model.dto.StoreDto
+import com.burdantap.domain.model.entity.StoreEntity
 import com.burdantap.domain.mapper.toCreateEntity
 import com.burdantap.domain.mapper.toResponse
 import com.burdantap.domain.model.response.StoreResponse

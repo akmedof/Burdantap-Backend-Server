@@ -1,8 +1,8 @@
 package com.burdantap.controller.authentication
 
 import com.burdantap.data.repository.PartnerRepository
-import com.burdantap.domain.dto.partner.PartnerDto
-import com.burdantap.domain.dto.partner.PartnerLoginDto
+import com.burdantap.domain.model.dto.partner.PartnerDto
+import com.burdantap.domain.model.dto.partner.PartnerLoginDto
 import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.domain.model.base.ErrorResponse
 import com.burdantap.controller.endpoint.AuthEndpoint

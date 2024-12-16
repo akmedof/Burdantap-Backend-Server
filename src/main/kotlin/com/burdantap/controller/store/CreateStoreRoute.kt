@@ -1,7 +1,7 @@
 package com.burdantap.controller.store
 
 import com.burdantap.data.repository.StoreRepository
-import com.burdantap.domain.dto.StoreDto
+import com.burdantap.domain.model.dto.StoreDto
 import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.controller.endpoint.StoreEndpoint
 import com.burdantap.domain.model.securty.TokenType

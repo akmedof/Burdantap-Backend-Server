@@ -1,8 +1,8 @@
 package com.burdantap.data.remote
 
-import com.burdantap.domain.dto.partner.PartnerDto
-import com.burdantap.domain.dto.partner.PartnerLoginDto
-import com.burdantap.domain.entity.PartnerEntity
+import com.burdantap.domain.model.dto.partner.PartnerDto
+import com.burdantap.domain.model.dto.partner.PartnerLoginDto
+import com.burdantap.domain.model.entity.PartnerEntity
 import com.burdantap.domain.mapper.toEntity
 import com.burdantap.domain.mapper.toResponse
 import com.burdantap.domain.model.response.PartnerResponse

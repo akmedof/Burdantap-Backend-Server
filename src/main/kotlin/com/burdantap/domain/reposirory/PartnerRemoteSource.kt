@@ -1,7 +1,7 @@
 package com.burdantap.domain.reposirory
 
-import com.burdantap.domain.dto.partner.PartnerDto
-import com.burdantap.domain.dto.partner.PartnerLoginDto
+import com.burdantap.domain.model.dto.partner.PartnerDto
+import com.burdantap.domain.model.dto.partner.PartnerLoginDto
 import com.burdantap.domain.model.response.PartnerResponse
 
 interface PartnerRemoteSource {

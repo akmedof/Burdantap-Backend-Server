@@ -1,6 +1,6 @@
 package com.burdantap.data.repository
 
-import com.burdantap.domain.dto.color.ColorDto
+import com.burdantap.domain.model.dto.color.ColorDto
 import com.burdantap.domain.model.response.ColorResponse
 import com.burdantap.domain.reposirory.ColorRemoteSource
 

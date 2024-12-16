@@ -1,4 +1,4 @@
-package com.burdantap.domain.entity
+package com.burdantap.domain.model.entity
 
 import com.burdantap.domain.model.type.Verification
 import kotlinx.serialization.Serializable

@@ -1,4 +1,4 @@
-package com.burdantap.domain.dto.product
+package com.burdantap.domain.model.dto.product
 
 import kotlinx.serialization.Serializable
 

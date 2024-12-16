@@ -1,16 +1,17 @@
-package com.burdantap.domain.entity.product
+package com.burdantap.domain.model.entity.product
 
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 import java.util.*
 
 @Serializable
-data class ProductEntity(
+data class ProductDetailEntity(
     val uuid: String = UUID.randomUUID().toString(),
+    val title: String,
+    val slug: String,
     val modelCode: String,
-    val storeId: String,
-//    val brandId: String,
-//    val features: List<ProductFeatureDto>,
-    val descriptions: String,
+    val imageUrls: List<String> = listOf(),
+//    val colorId: String,
+//    val specificationsId: List<String>,
     val createdAt: String = LocalDateTime.now().toString()
 )

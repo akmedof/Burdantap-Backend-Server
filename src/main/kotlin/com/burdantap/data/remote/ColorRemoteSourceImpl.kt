@@ -1,7 +1,7 @@
 package com.burdantap.data.remote
 
-import com.burdantap.domain.dto.color.ColorDto
-import com.burdantap.domain.entity.ColorEntity
+import com.burdantap.domain.model.dto.color.ColorDto
+import com.burdantap.domain.model.entity.ColorEntity
 import com.burdantap.domain.mapper.toEntity
 import com.burdantap.domain.mapper.toResponse
 import com.burdantap.domain.model.response.ColorResponse

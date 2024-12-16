@@ -1,8 +1,8 @@
 package com.burdantap.data.remote
 
-import com.burdantap.domain.dto.product.ProductDto
-import com.burdantap.domain.entity.product.ProductDetailEntity
-import com.burdantap.domain.entity.product.ProductEntity
+import com.burdantap.domain.model.dto.product.ProductDto
+import com.burdantap.domain.model.entity.product.ProductDetailEntity
+import com.burdantap.domain.model.entity.product.ProductEntity
 import com.burdantap.domain.mapper.toEntity
 import com.burdantap.domain.mapper.toResponses
 import com.burdantap.domain.model.response.product.ProductResponse

@@ -1,6 +1,6 @@
 package com.burdantap.domain.model.response
 
-import com.burdantap.domain.dto.partner.PartnerDto
+import com.burdantap.domain.model.dto.partner.PartnerDto
 import kotlinx.serialization.Serializable
 
 @Serializable

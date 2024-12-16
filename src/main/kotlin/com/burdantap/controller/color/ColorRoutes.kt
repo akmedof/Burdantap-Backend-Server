@@ -1,7 +1,7 @@
 package com.burdantap.controller.color
 
 import com.burdantap.data.repository.ColorRepository
-import com.burdantap.domain.dto.color.ColorDto
+import com.burdantap.domain.model.dto.color.ColorDto
 import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.controller.endpoint.ColorEndpoint
 import io.ktor.http.*

@@ -1,6 +1,6 @@
 package com.burdantap.data.repository
 
-import com.burdantap.domain.dto.StoreDto
+import com.burdantap.domain.model.dto.StoreDto
 import com.burdantap.domain.model.response.StoreResponse
 import com.burdantap.domain.reposirory.StoreRemoteSource
 

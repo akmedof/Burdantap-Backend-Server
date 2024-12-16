@@ -3,7 +3,7 @@ package com.burdantap.controller.product
 import com.burdantap.data.repository.ProductDetailRepository
 import com.burdantap.data.repository.ProductRepository
 import com.burdantap.data.repository.StoreRepository
-import com.burdantap.domain.dto.product.ProductDto
+import com.burdantap.domain.model.dto.product.ProductDto
 import com.burdantap.domain.model.base.BaseResponse
 import com.burdantap.controller.endpoint.FileDirectionPath
 import com.burdantap.controller.endpoint.ProductEndpoint

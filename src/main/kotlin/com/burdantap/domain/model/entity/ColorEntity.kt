@@ -1,4 +1,4 @@
-package com.burdantap.domain.entity
+package com.burdantap.domain.model.entity
 
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
